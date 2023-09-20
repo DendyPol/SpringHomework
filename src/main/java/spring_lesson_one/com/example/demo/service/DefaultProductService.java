@@ -4,8 +4,7 @@ import spring_lesson_one.com.example.demo.jpa.Product;
 
 import java.util.List;
 
-public interface DefaultService {
-
+public interface DefaultProductService {
   List<Product> findAll();
 
   Product findById(long id);

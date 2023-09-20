@@ -7,12 +7,9 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-@Getter
-@Setter
-@Entity
 @NoArgsConstructor
-@EqualsAndHashCode
-
+@Entity
+@Data
 public class Product {
   @Id
   private Long id;

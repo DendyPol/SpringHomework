@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest(classes = DemoApplication.class)
-public class ProductServiceTest {
+public class ProductServiceTest implements WithAssertions {
   @Autowired
   ProductService productService;
 
@@ -28,36 +31,28 @@ public class ProductServiceTest {
 
   @Test
   public void findAll() {
-    var productOne = new Product(1L, "Product One", new BigDecimal(10));
-    var productTwo = new Product(2L, "Product Two", new BigDecimal(11));
-    productService.create(productOne);
-    productService.create(productTwo);
-    var expected = List.of(productOne, productTwo);
+    var expected = List.of(productService.create(new Product(1L, "Product One", new BigDecimal(10))), productService.create(new Product(2L, "Product Two", new BigDecimal(11))));
     var result = productService.findAll();
-    Assertions.assertEquals(expected, result);
+    assertEquals(expected, result);
   }
 
   @Test
   public void findById() {
-    var product = new Product(1L, "Product one", new BigDecimal(20));
-    productService.create(product);
-    Assertions.assertEquals(product, productService.findById(product.getId()));
+    var product = productService.create(new Product(1L, "Product one", new BigDecimal(20)));
+    assertEquals(product, productService.findById(product.getId()));
   }
 
   @Test
   public void create() {
     var product = new Product(1L, "Product one", new BigDecimal(20));
     var result = productService.create(product);
-    Assertions.assertEquals(product, result);
+    assertEquals(product, result);
   }
 
   @Test
   public void delete() {
-    var productOne = new Product(1L, "Product one", new BigDecimal(20));
-    productService.create(productOne);
+    var productOne = productService.create(new Product(1L, "Product one", new BigDecimal(20)));
     productService.delete(productOne.getId());
-    Assertions.assertThrows(ObjectNotFoundException.class, () -> {
-      productService.findById(productOne.getId());
-    });
+    assertThrows(ObjectNotFoundException.class, () -> productService.findById(productOne.getId()));
   }
 }

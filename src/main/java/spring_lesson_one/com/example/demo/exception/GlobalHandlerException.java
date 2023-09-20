@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalHandlerException {
   @ExceptionHandler(ObjectNotFoundException.class)
-  public void NotFoundException(Exception e) {
+  public void notFoundException(Exception e) {
     log.warn(e.getMessage());
+  }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  public void negativeNumberException(Exception ex) {
+    log.warn(ex.getMessage());
   }
 }

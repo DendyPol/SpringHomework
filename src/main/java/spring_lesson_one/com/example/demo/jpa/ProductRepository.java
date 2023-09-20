@@ -17,7 +17,7 @@ public class ProductRepository {
   }
 
   public void delete(long id) {
-    var product = getIdProduct(id);
+    var product = findById(id);
     products.remove(product);
   }
 
@@ -25,10 +25,10 @@ public class ProductRepository {
     return products;
   }
 
-  public Product getIdProduct(long id) {
+  public Product findById(long id) {
     return products.stream()
       .filter(product -> id == product.getId())
       .findFirst()
-      .orElseThrow(() -> new ObjectNotFoundException(String.format("id под номером %d не найден", id)));
+      .orElseThrow(() -> new ObjectNotFoundException(String.format("Product c ID %d не найден", id)));
   }
 }
