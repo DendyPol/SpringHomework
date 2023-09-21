@@ -17,7 +17,7 @@ public class DefaultProductService implements ProductService {
   }
 
   public Product findById(long id) {
-    return service.findById(id);
+    return service.findByIdThrows(id);
   }
 
   public Product create(Product product) {

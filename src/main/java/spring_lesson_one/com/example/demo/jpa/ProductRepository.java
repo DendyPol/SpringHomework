@@ -17,7 +17,7 @@ public class ProductRepository {
   }
 
   public void delete(long id) {
-    var product = findById(id);
+    var product = findByIdThrows(id);
     products.remove(product);
   }
 
@@ -25,7 +25,7 @@ public class ProductRepository {
     return products;
   }
 
-  public Product findById(long id) {
+  public Product findByIdThrows(long id) {
     return products.stream()
       .filter(product -> id == product.getId())
       .findFirst()
