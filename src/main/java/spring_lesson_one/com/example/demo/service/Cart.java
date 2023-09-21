@@ -14,7 +14,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class Cart {
   private final Map<Product, Integer> basket = new HashMap<>();
-  private final ProductService productService;
+  private final DefaultProductService productService;
 
   public Product addProduct(long id, int quantity) {
     if (quantity < 0) {

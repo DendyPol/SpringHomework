@@ -9,7 +9,7 @@ import spring_lesson_one.com.example.demo.DemoApplication;
 import spring_lesson_one.com.example.demo.exception.ObjectNotFoundException;
 import spring_lesson_one.com.example.demo.jpa.Product;
 import spring_lesson_one.com.example.demo.jpa.ProductRepository;
-import spring_lesson_one.com.example.demo.service.ProductService;
+import spring_lesson_one.com.example.demo.service.DefaultProductService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,12 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest(classes = DemoApplication.class)
 public class ProductServiceTest implements WithAssertions {
   @Autowired
-  ProductService productService;
+  DefaultProductService productService;
 
   @BeforeEach
   public void setup() {
     ProductRepository productRepository = new ProductRepository(new ArrayList<>());
-    productService = new ProductService(productRepository);
+    productService = new DefaultProductService(productRepository);
   }
 
   @Test

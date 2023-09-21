@@ -10,7 +10,7 @@ import spring_lesson_one.com.example.demo.exception.NegativeNumberException;
 import spring_lesson_one.com.example.demo.exception.ObjectNotFoundException;
 import spring_lesson_one.com.example.demo.jpa.Product;
 import spring_lesson_one.com.example.demo.service.Cart;
-import spring_lesson_one.com.example.demo.service.ProductService;
+import spring_lesson_one.com.example.demo.service.DefaultProductService;
 
 import java.math.BigDecimal;
 
@@ -21,7 +21,7 @@ public class CartTest implements WithAssertions {
   @Autowired
   Cart cart;
   @Autowired
-  ProductService productService;
+  DefaultProductService productService;
 
   @BeforeEach
   public void setup() {
